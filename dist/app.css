@@ -1,0 +1,201 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@400&display=swap");
+.ct-product-tile-horizontal--container, .product:has(:is(.pwc-discount-amount, .pwc-discount-amount-pvpr, .col-discount-amount)) {
+  background-color: rgba(235, 2, 3, 0.2);
+  border: 2px solid rgba(235, 2, 3, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.ct-product-tile-horizontal--container picture img, .product:has(:is(.pwc-discount-amount, .pwc-discount-amount-pvpr, .col-discount-amount)) picture img {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  display: block;
+}
+
+#sl-window {
+  --tile: 128px;
+  position: fixed;
+  z-index: 99999;
+  background: #2f3b46;
+  color: #fff;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+#sl-window.sl-full {
+  --tile: 164px;
+}
+#sl-window.sl-min {
+  border-radius: 8px;
+  cursor: grab;
+}
+#sl-window.sl-min #sl-body,
+#sl-window.sl-min #sl-sync,
+#sl-window.sl-min .sl-search-wrap {
+  display: none;
+}
+#sl-window.sl-loading #sl-progress {
+  display: block;
+}
+#sl-window #sl-header {
+  background: #1c2530;
+  padding: 8px 12px 4px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: pointer;
+}
+#sl-window #sl-header .sl-title {
+  font: 400 18px "Kalam", cursive;
+  margin-bottom: 6px;
+}
+#sl-window #sl-header .sl-search-wrap {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+#sl-window #sl-header .sl-search-wrap #sl-search {
+  flex: 1;
+  height: 32px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: text;
+  font: 400 15px "Noto Sans", sans-serif;
+}
+#sl-window #sl-header .sl-search-wrap #sl-clear {
+  flex: 0 0 26px;
+  height: 26px;
+  border: none;
+  border-radius: 50%;
+  background: #546e7a;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+#sl-window #sl-header #sl-progress {
+  height: 3px;
+  width: 100%;
+  background: #264057;
+  display: none;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+#sl-window #sl-header #sl-progress::before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 40%;
+  background: #4dd0e1;
+  animation: slide 1.2s linear infinite;
+}
+#sl-window #sl-header .sl-buttons {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+#sl-window #sl-header .sl-buttons > button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  margin-left: 6px;
+  cursor: pointer;
+}
+#sl-window #sl-body {
+  padding: 10px;
+  overflow: auto;
+  flex: 1;
+}
+#sl-window #sl-body .sl-accordion {
+  margin-bottom: 12px;
+}
+#sl-window #sl-body .sl-accordion .sl-acc-header {
+  background: #3e4a57;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#sl-window #sl-body .sl-accordion .sl-acc-header.open {
+  background: #28323e;
+}
+#sl-window #sl-body .sl-accordion .sl-acc-body {
+  display: none;
+  padding-top: 8px;
+  flex-wrap: wrap;
+  gap: 6px;
+  border-top: 2px solid #264057;
+}
+#sl-window #sl-body .sl-accordion .sl-acc-body.open {
+  display: flex;
+}
+#sl-window #sl-body .sl-empty {
+  color: #eee;
+  font: 400 14px "Noto Sans", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+#sl-window .sl-tile {
+  flex: 0 0 var(--tile);
+  width: var(--tile);
+  height: var(--tile);
+  background: #fff;
+  color: #264057;
+  border: 2px solid #264057;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+#sl-window .sl-tile.added {
+  background: #3fa34d;
+}
+#sl-window .sl-tile .sl-icon {
+  width: 48px;
+  height: 48px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#sl-window .sl-tile .sl-label {
+  margin-top: 6px;
+  padding: 0 4px;
+  font: 400 14px "Noto Sans", sans-serif;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+#sl-window #sl-sync {
+  margin: 8px 10px 12px;
+  width: calc(100% - 20px);
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background: #4caf50;
+  color: #fff;
+  font: 600 15px "Noto Sans", sans-serif;
+  cursor: pointer;
+}
+#sl-window #sl-sync:hover {
+  background: #43a047;
+}
+
+@keyframes slide {
+  0% {
+    margin-left: -40%;
+  }
+  100% {
+    margin-left: 100%;
+  }
+}
