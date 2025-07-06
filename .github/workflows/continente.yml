@@ -1,0 +1,60 @@
+name: continente
+
+on: [push]
+
+jobs:
+  static-code-analysis:
+    name: static-code-analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - run: |
+          npm install
+
+      - run: |
+          npm run lint:check
+
+      - run: |
+          npm run prettier:check
+
+  build:
+    name: static-code-analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - run: |
+          npm install
+
+      - run: |
+          npm run build
+
+      - name: Commit built files (only on main)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "${{ github.run_id }}+github-actions[bot]@users.noreply.github.com"
+
+          git add dist/app.css dist/app.js
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "npm run build #${{ github.run_id }}"
+            git push
+          fi
